@@ -1,0 +1,14 @@
+name: SimpleVeinMiner
+version: '${project.version}'
+main: me.lebogo.simpleveinminer.SimpleVeinMiner
+api-version: 1.19
+prefix: SVM
+authors: [LeBogo]
+description: User-Configurable VeinMiner plugin for Minecraft 1.19.4
+website: https://lebogo.me
+commands:
+  simpleveinminer:
+    description: Configuration command for SimpleVeinMiner
+    usage: /svm
+    aliases:
+      - svm
