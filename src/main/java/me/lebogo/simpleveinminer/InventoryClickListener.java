@@ -2,6 +2,8 @@ package me.lebogo.simpleveinminer;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.Style;
+import net.kyori.adventure.text.format.TextColor;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -34,7 +36,7 @@ public class InventoryClickListener implements Listener {
 
         if (title.content().equals("SVM - Category Selection")) {
             handleCategorySelectionMenu(event);
-        } else if (title.content().equals("SVM - Block Selection")) {
+        } else {
             handleBlockToggleMenu(event, inventory);
         }
 
@@ -60,8 +62,7 @@ public class InventoryClickListener implements Listener {
             return;
         }
 
-        List<Material> palette = category.getMaterials();
-        openBlockMenu((Player) event.getWhoClicked(), palette);
+        openBlockMenu((Player) event.getWhoClicked(), category);
 
     }
 
@@ -77,21 +78,31 @@ public class InventoryClickListener implements Listener {
         List<Material> enabledBlocks = config.getEnabledBlocks();
         column += 9;
 
+        TextComponent message;
+
         if (enabledBlocks.contains(material)) {
             enabledBlocks.remove(material);
             inventory.setItem(column, SimpleVeinMiner.DISABLED_ITEM_STACK);
+            message = Component.text("Disabled " + material.name());
+            message = message.style(Style.style(TextColor.color(0xFB5454)));
         } else {
             enabledBlocks.add(material);
             inventory.setItem(column, SimpleVeinMiner.ENABLED_ITEM_STACK);
+            message = Component.text("Enabled " + material.name());
+            message = message.style(Style.style(TextColor.color(0x54FB54)));
         }
+
+        Player player = (Player) event.getWhoClicked();
+        player.sendMessage(message);
 
         config.setEnabledBlocks(enabledBlocks);
         config.save();
     }
 
-    private void openBlockMenu(Player player, List<Material> palette) {
+    private void openBlockMenu(Player player, VeinMinerCategory category) {
+        List<Material> palette = category.getMaterials();
         Inventory menuInventory = player.getServer().createInventory(null,
-                9 * 3, Component.text("SVM - Block Selection"));
+                9 * 3, Component.text("SVM - " + category.getName()));
 
         for (Material veinBlock : palette) {
             ItemStack itemStack = new ItemStack(veinBlock);
