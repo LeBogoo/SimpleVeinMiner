@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class BlockBreakListener implements Listener {
 
     @EventHandler
@@ -43,11 +42,10 @@ public class BlockBreakListener implements Listener {
             return;
         }
 
+        Map<Location, Block> veinBlocks = new HashMap<>();
+        getVeinBlocks(block, veinBlocks, 0);
 
-        Map<Location,Block> veinBlocks = new HashMap<>();
-        getVeinBlocks(block,veinBlocks, 0);
-
-        SimpleVeinMiner.LOGGER.info("Vein Blocks: " + veinBlocks.size());
+        // SimpleVeinMiner.LOGGER.info("Vein Blocks: " + veinBlocks.size());
         veinBlocks.values().forEach(veinBlock -> veinBlock.breakNaturally(tool));
     }
 
