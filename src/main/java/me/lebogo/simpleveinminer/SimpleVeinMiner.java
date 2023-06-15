@@ -82,6 +82,8 @@ public final class SimpleVeinMiner extends JavaPlugin {
         netherCategory.addMaterial(NETHER_QUARTZ_ORE);
         netherCategory.addMaterial(NETHER_GOLD_ORE);
         netherCategory.addMaterial(ANCIENT_DEBRIS);
+        netherCategory.addMaterial(NETHER_WART_BLOCK);
+        netherCategory.addMaterial(GLOWSTONE);
 
         VeinMinerCategory stoneCategory = new VeinMinerCategory("Stones", STONE);
         VEIN_MINER_CATEGORIES.add(stoneCategory);
@@ -92,12 +94,25 @@ public final class SimpleVeinMiner extends JavaPlugin {
         stoneCategory.addMaterial(TUFF);
         stoneCategory.addMaterial(CALCITE);
 
+        VeinMinerCategory etcCategory = new VeinMinerCategory("Etc", DIRT);
+        VEIN_MINER_CATEGORIES.add(etcCategory);
+
+        etcCategory.addMaterial(ICE);
+        etcCategory.addMaterial(PACKED_ICE);
+        etcCategory.addMaterial(BLUE_ICE);
+        etcCategory.addMaterial(SNOW_BLOCK);
+        etcCategory.addMaterial(SNOW);
+        etcCategory.addMaterial(CLAY);
+
         VeinMinerCategory unstableCategory = new VeinMinerCategory("Unstable", BARRIER);
         VEIN_MINER_CATEGORIES.add(unstableCategory);
 
         unstableCategory.addMaterial(SAND);
         unstableCategory.addMaterial(GRAVEL);
         unstableCategory.addMaterial(DEEPSLATE);
+        unstableCategory.addMaterial(STONE);
+        unstableCategory.addMaterial(DIRT);
+
     }
 
     @Override
