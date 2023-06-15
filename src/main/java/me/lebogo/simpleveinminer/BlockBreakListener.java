@@ -45,6 +45,8 @@ public class BlockBreakListener implements Listener {
         Map<Location, Block> veinBlocks = new HashMap<>();
         getVeinBlocks(block, veinBlocks, 0);
 
+        veinBlocks.entrySet().removeIf(entry -> entry.getKey().distanceSquared(player.getLocation()) > 100);
+
         // SimpleVeinMiner.LOGGER.info("Vein Blocks: " + veinBlocks.size());
         veinBlocks.values().forEach(veinBlock -> veinBlock.breakNaturally(tool));
     }
