@@ -19,6 +19,11 @@ public class InventoryClickListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
+        // check if title is type of TextComponent
+        if (!(event.getView().title() instanceof TextComponent)) {
+            return;
+        }
+
         TextComponent title = (TextComponent) event.getView().title();
         boolean isVeinMinerMenu = title.content().startsWith("SVM -");
 
