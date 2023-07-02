@@ -31,6 +31,11 @@ public class InventoryClickListener implements Listener {
             return;
         }
 
+        // check if inventory is top inventory
+        if (event.getClickedInventory() != event.getView().getTopInventory()) {
+            return;
+        }
+
         event.setCancelled(true);
 
         Inventory inventory = event.getClickedInventory();
