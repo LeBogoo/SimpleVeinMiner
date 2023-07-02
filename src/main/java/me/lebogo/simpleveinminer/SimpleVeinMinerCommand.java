@@ -106,16 +106,17 @@ public class SimpleVeinMinerCommand implements CommandExecutor {
     }
 
     private void openGui(Player player) {
+        Component title = Component.text("SVM - Category Selection");
         Inventory inventory = player.getServer().createInventory(player, InventoryType.HOPPER,
-                Component.text("SVM - Category Selection"));
+                title);
 
         if (SimpleVeinMiner.VEIN_MINER_CATEGORIES.size() > 5 && SimpleVeinMiner.VEIN_MINER_CATEGORIES.size() <= 9) {
             inventory = player.getServer().createInventory(player, InventoryType.DROPPER,
-                    Component.text("SVM - Category Selection"));
+                    title);
         } else if (SimpleVeinMiner.VEIN_MINER_CATEGORIES.size() > 9) {
             inventory = player.getServer().createInventory(player,
                     SimpleVeinMiner.VEIN_MINER_CATEGORIES.size() / 9 * 9 + 9,
-                    Component.text("SVM - Category Selection"));
+                    title);
         }
 
         for (VeinMinerCategory veinMinerCategory : SimpleVeinMiner.VEIN_MINER_CATEGORIES) {
@@ -124,6 +125,17 @@ public class SimpleVeinMinerCommand implements CommandExecutor {
             itemMeta.displayName(Component.text(veinMinerCategory.getName()));
             itemStack.setItemMeta(itemMeta);
             inventory.addItem(itemStack);
+        }
+
+        ItemStack itemStack = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.displayName(Component.text(" "));
+        itemStack.setItemMeta(itemMeta);
+
+        for (int i = 0; i < inventory.getSize(); i++) {
+            if (inventory.getItem(i) == null) {
+                inventory.setItem(i, itemStack);
+            }
         }
 
         player.openInventory(inventory);

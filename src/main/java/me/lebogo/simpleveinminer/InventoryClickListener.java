@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
@@ -37,6 +38,12 @@ public class InventoryClickListener implements Listener {
         }
 
         event.setCancelled(true);
+
+        ItemStack clickedItem = event.getCurrentItem();
+        String itemName = ((TextComponent) clickedItem.getItemMeta().displayName()).content();
+        if (itemName.equals(" ")) {
+            return;
+        }
 
         Inventory inventory = event.getClickedInventory();
 
@@ -129,6 +136,17 @@ public class InventoryClickListener implements Listener {
                 menuInventory.setItem(i + 9, SimpleVeinMiner.ENABLED_ITEM_STACK);
             } else {
                 menuInventory.setItem(i + 9, SimpleVeinMiner.DISABLED_ITEM_STACK);
+            }
+        }
+
+        ItemStack itemStack = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.displayName(Component.text(" "));
+        itemStack.setItemMeta(itemMeta);
+
+        for (int i = 0; i < menuInventory.getSize(); i++) {
+            if (menuInventory.getItem(i) == null) {
+                menuInventory.setItem(i, itemStack);
             }
         }
 
