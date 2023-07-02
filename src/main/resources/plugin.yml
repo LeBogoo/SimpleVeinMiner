@@ -9,6 +9,6 @@ website: https://lebogo.me
 commands:
   simpleveinminer:
     description: Configuration command for SimpleVeinMiner
-    usage: /svm
+    usage: /svm <toggle|disable> <block|category>
     aliases:
       - svm
