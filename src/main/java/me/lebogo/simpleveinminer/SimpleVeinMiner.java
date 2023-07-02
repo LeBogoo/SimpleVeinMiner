@@ -36,6 +36,7 @@ public final class SimpleVeinMiner extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         getCommand("simpleveinminer").setExecutor(new SimpleVeinMinerCommand());
+        getCommand("simpleveinminer").setTabCompleter(new SimpleVeinMinerTabCompleter());
         getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
         getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
 
