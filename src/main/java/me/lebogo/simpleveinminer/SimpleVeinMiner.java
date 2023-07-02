@@ -94,6 +94,16 @@ public final class SimpleVeinMiner extends JavaPlugin {
         stoneCategory.addMaterial(TUFF);
         stoneCategory.addMaterial(CALCITE);
 
+        VeinMinerCategory leafCategory = new VeinMinerCategory("Leaves", OAK_LEAVES);
+        VEIN_MINER_CATEGORIES.add(leafCategory);
+
+        leafCategory.addMaterial(OAK_LEAVES);
+        leafCategory.addMaterial(SPRUCE_LEAVES);
+        leafCategory.addMaterial(BIRCH_LEAVES);
+        leafCategory.addMaterial(JUNGLE_LEAVES);
+        leafCategory.addMaterial(ACACIA_LEAVES);
+        leafCategory.addMaterial(DARK_OAK_LEAVES);
+        leafCategory.addMaterial(MANGROVE_LEAVES);
         VeinMinerCategory etcCategory = new VeinMinerCategory("Etc", DIRT);
         VEIN_MINER_CATEGORIES.add(etcCategory);
 
