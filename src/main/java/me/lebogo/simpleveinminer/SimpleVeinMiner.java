@@ -50,8 +50,7 @@ public final class SimpleVeinMiner extends JavaPlugin {
         logCategory.addMaterial(ACACIA_LOG);
         logCategory.addMaterial(DARK_OAK_LOG);
         logCategory.addMaterial(MANGROVE_LOG);
-        logCategory.addMaterial(CRIMSON_STEM);
-        logCategory.addMaterial(WARPED_STEM);
+        logCategory.addMaterial(CHERRY_LOG);
 
         VeinMinerCategory oreCategory = new VeinMinerCategory("Ores", IRON_ORE);
         VEIN_MINER_CATEGORIES.add(oreCategory);
@@ -85,6 +84,8 @@ public final class SimpleVeinMiner extends JavaPlugin {
         netherCategory.addMaterial(ANCIENT_DEBRIS);
         netherCategory.addMaterial(NETHER_WART_BLOCK);
         netherCategory.addMaterial(GLOWSTONE);
+        netherCategory.addMaterial(CRIMSON_STEM);
+        netherCategory.addMaterial(WARPED_STEM);
 
         VeinMinerCategory stoneCategory = new VeinMinerCategory("Stones", STONE);
         VEIN_MINER_CATEGORIES.add(stoneCategory);
