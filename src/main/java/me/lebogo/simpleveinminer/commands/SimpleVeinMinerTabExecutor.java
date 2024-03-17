@@ -33,6 +33,15 @@ public class SimpleVeinMinerTabExecutor implements TabExecutor {
                     openGui(player);
                     break;
 
+                case 1:
+                    if (args[0].equalsIgnoreCase("reload")) {
+                        SimpleVeinMiner.getPlugin(SimpleVeinMiner.class).reloadCategories();
+                        Component message = Component.text("Reloaded VeinMiner Categories");
+                        message = message.style(Style.style(TextColor.color(0x54FB54)));
+                        player.sendMessage(message);
+                    }
+
+
                 case 2:
                     if (args[0].equalsIgnoreCase("disable")) {
                         disableCategory(player, args[1]);
