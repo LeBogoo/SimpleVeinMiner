@@ -1,5 +1,6 @@
-package me.lebogo.simpleveinminer;
+package me.lebogo.simpleveinminer.listeners;
 
+import me.lebogo.simpleveinminer.veinminer.VeinMinerBlockConfig;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

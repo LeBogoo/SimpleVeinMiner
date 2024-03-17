@@ -1,4 +1,4 @@
-package me.lebogo.simpleveinminer;
+package me.lebogo.simpleveinminer.veinminer;
 
 import org.bukkit.Material;
 

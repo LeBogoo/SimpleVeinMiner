@@ -1,30 +1,30 @@
-package me.lebogo.simpleveinminer;
+package me.lebogo.simpleveinminer.commands;
 
+import me.lebogo.simpleveinminer.SimpleVeinMiner;
+import me.lebogo.simpleveinminer.veinminer.VeinMinerBlockConfig;
+import me.lebogo.simpleveinminer.veinminer.VeinMinerCategory;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
-
-import java.util.List;
-
 import org.bukkit.Material;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class SimpleVeinMinerCommand implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.List;
 
-    public SimpleVeinMinerCommand() {
-    }
-
+public class SimpleVeinMinerTabExecutor implements TabExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String raw,
-            @NotNull String[] args) {
+                             @NotNull String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
 
@@ -141,4 +141,51 @@ public class SimpleVeinMinerCommand implements CommandExecutor {
         player.openInventory(inventory);
     }
 
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command,
+                                                @NotNull String raw, @NotNull String[] args) {
+
+        if (args.length == 1) {
+            return List.of("toggle", "disable");
+        }
+
+        if (args.length == 2) {
+            switch (args[0].toLowerCase()) {
+                case "toggle": {
+                    List<String> validMaterialNames = new ArrayList<>();
+
+                    for (VeinMinerCategory category : SimpleVeinMiner.VEIN_MINER_CATEGORIES) {
+                        for (Material material : category.getMaterials()) {
+                            String materialName = material.name().toLowerCase();
+                            if (materialName.contains(args[1].toLowerCase())) {
+                                validMaterialNames.add(materialName);
+                            }
+                        }
+                    }
+
+                    return validMaterialNames;
+                }
+
+                case "disable": {
+                    List<String> validCategoryNames = new ArrayList<>();
+                    validCategoryNames.add("all");
+
+                    for (VeinMinerCategory category : SimpleVeinMiner.VEIN_MINER_CATEGORIES) {
+                        String categoryName = category.getName().toLowerCase();
+                        if (categoryName.contains(args[1].toLowerCase())) {
+                            validCategoryNames.add(categoryName);
+                        }
+                    }
+
+                    return validCategoryNames;
+                }
+
+                default:
+                    break;
+            }
+
+        }
+
+        return null;
+    }
 }

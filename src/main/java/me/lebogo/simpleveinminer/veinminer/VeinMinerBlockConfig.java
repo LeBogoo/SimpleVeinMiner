@@ -1,5 +1,6 @@
-package me.lebogo.simpleveinminer;
+package me.lebogo.simpleveinminer.veinminer;
 
+import me.lebogo.simpleveinminer.SimpleVeinMiner;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 

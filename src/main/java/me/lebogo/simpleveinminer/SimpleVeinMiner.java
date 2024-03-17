@@ -1,5 +1,9 @@
 package me.lebogo.simpleveinminer;
 
+import me.lebogo.simpleveinminer.commands.SimpleVeinMinerTabExecutor;
+import me.lebogo.simpleveinminer.listeners.BlockBreakListener;
+import me.lebogo.simpleveinminer.listeners.InventoryClickListener;
+import me.lebogo.simpleveinminer.veinminer.VeinMinerCategory;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -35,11 +39,17 @@ public final class SimpleVeinMiner extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        getCommand("simpleveinminer").setExecutor(new SimpleVeinMinerCommand());
-        getCommand("simpleveinminer").setTabCompleter(new SimpleVeinMinerTabCompleter());
+
+        // REGISTER COMMANDS
+        SimpleVeinMinerTabExecutor simpleVeinMinerTabExecutor = new SimpleVeinMinerTabExecutor();
+        getCommand("simpleveinminer").setExecutor(simpleVeinMinerTabExecutor);
+        getCommand("simpleveinminer").setTabCompleter(simpleVeinMinerTabExecutor);
+
+        // REGISTER LISTENERS
         getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
         getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
 
+        // REGISTER VEIN MINER CATEGORIES
         VeinMinerCategory logCategory = new VeinMinerCategory("Logs", OAK_LOG);
         VEIN_MINER_CATEGORIES.add(logCategory);
 
